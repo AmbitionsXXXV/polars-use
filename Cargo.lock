@@ -676,6 +676,7 @@ name = "polars-app"
 version = "0.1.0"
 dependencies = [
  "anyhow",
+ "polars",
  "polars-rw",
 ]
 
