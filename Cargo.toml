@@ -5,4 +5,5 @@ default-members = ["polars-app"]
 
 [workspace.dependencies]
 anyhow = "1.0.86"
+chrono = "0.4.38"
 polars = { version = "0.41.3", features = ["lazy"] }
