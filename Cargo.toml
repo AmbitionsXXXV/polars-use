@@ -1,7 +1,8 @@
-[package]
-name = "polars_learn"
-version = "0.1.0"
-edition = "2021"
+[workspace]
+members = ["polars-app", "polars-rw"]
+resolver = "2"
+default-members = ["polars-app"]
 
-[dependencies]
+[workspace.dependencies]
+anyhow = "1.0.86"
 polars = { version = "0.41.3", features = ["lazy"] }
