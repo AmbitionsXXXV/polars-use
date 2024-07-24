@@ -1,8 +1,8 @@
 use anyhow::Result;
 use polars::frame::DataFrame;
 use polars_rw::expression::{
-  polars_filter, polars_group_by, polars_select, polars_with_column,
-  polars_with_columns,
+  polars_combination_expression, polars_filter, polars_group_by, polars_select,
+  polars_with_column, polars_with_columns,
 };
 
 pub fn run_polars_expression(df: &DataFrame) -> Result<()> {
@@ -28,6 +28,8 @@ pub fn run_polars_expression(df: &DataFrame) -> Result<()> {
 
   // group_by
   polars_group_by()?;
+
+  polars_combination_expression()?;
 
   Ok(())
 }
