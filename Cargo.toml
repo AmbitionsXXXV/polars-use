@@ -1,9 +1,10 @@
 [workspace]
-members = ["polars-app", "polars-rw"]
+members = ["polars-app", "polars-rw", "utils"]
 resolver = "2"
 default-members = ["polars-app"]
 
 [workspace.dependencies]
 anyhow = "1.0.86"
+thiserror = "1.0.63"
 chrono = "0.4.38"
 polars = { version = "0.41.3", features = ["lazy"] }

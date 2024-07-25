@@ -7,3 +7,4 @@ edition = "2021"
 anyhow.workspace = true
 polars.workspace = true
 polars-rw = { version = "0.1.0", path = "../polars-rw" }
+utils = { version = "0.1.0", path = "../utils" }

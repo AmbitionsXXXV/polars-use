@@ -1,6 +1,6 @@
-use anyhow::Result;
 use chrono::prelude::*;
 use polars::prelude::*;
+use utils::prelude::*;
 
 pub fn polars_select(df: &DataFrame) -> Result<()> {
   // col("*") 选择所有列
