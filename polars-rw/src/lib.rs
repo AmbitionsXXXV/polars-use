@@ -3,6 +3,7 @@ use polars::prelude::*;
 use utils::prelude::*;
 
 pub mod expression;
+pub mod merge;
 
 pub fn polars_read() -> Result<DataFrame> {
   // 创建一个 DataFrame，包含四列数据：整数、日期、浮点数和字符串

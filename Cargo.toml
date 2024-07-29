@@ -1,6 +1,3 @@
-[lib]
-doctest = false
-
 [workspace]
 members = ["polars-app", "polars-rw", "utils"]
 resolver = "2"
