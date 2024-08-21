@@ -41,7 +41,7 @@ pub fn polars_filter(df: &DataFrame) -> Result<()> {
     )
     .collect()?;
 
-  println!("{:?}", out);
+  println!("filter 1 {:?}", out);
 
   let out = df
     .clone()
@@ -53,13 +53,12 @@ pub fn polars_filter(df: &DataFrame) -> Result<()> {
     )
     .collect()?; // 收集结果并执行计算
 
-  println!("{}", out); // 打印过滤后的 DataFrame
+  println!("filter 2 {}", out); // 打印过滤后的 DataFrame
 
   Ok(())
 }
 
 // region: Polars 表达式 -- with_column() 和 with_columns()
-
 pub fn polars_with_column(df: &DataFrame) -> Result<()> {
   let out = df
     .clone()
@@ -130,12 +129,11 @@ pub fn polars_group_by() -> Result<()> {
   let df2: DataFrame =
     df!("x" => 0..8, "y"=> &["A", "A", "A", "B", "B", "C", "X", "X"])
       .expect("should not fail");
-  println!("{}", df2);
 
   // 按列 "y" 进行分组，并聚合
   let out = df2.clone().lazy().group_by(["y"]).agg([len()]).collect()?;
 
-  println!("{}", out);
+  println!("group_by 1 {}", out);
 
   // 按列 "y" 进行分组，并聚合多个统计量
   let out = df2

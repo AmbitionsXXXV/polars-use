@@ -20,7 +20,7 @@ pub fn polars_read() -> Result<DataFrame> {
   )
   .unwrap(); // 创建 DataFrame 成功后，解除 Result 包装
 
-  println!("{:?}", df);
+  println!("df {:?}", df);
 
   Ok(df)
 }
