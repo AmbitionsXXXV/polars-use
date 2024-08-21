@@ -7,4 +7,4 @@ default-members = ["polars-app"]
 anyhow = "1.0.86"
 thiserror = "1.0.63"
 chrono = "0.4.38"
-polars = { version = "0.42.0", features = ["lazy"] }
+polars = { version = "0.42.0", features = ["lazy", "dtype-categorical"] }

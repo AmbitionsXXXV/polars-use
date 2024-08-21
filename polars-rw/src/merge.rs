@@ -32,5 +32,18 @@ pub fn merge_df() -> Result<()> {
 
   println!("<<<outer joined {:?}", joined);
 
+  // hstack 作用是将两个 DataFrame 水平合并
+  let stacked = df1.hstack(df2.clone().get_columns())?;
+
+  println!("<<<stacked {:?}", stacked);
+
+  let mut schema = Schema::new();
+  schema.with_column(
+    "symbol".into(),
+    DataType::Categorical(None, Default::default()),
+  );
+
+  println!("<<<schema {:?}", schema);
+
   Ok(())
 }
