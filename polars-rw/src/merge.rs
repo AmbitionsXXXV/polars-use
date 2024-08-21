@@ -20,6 +20,10 @@ pub fn merge_df() -> Result<()> {
 
   println!("<<<left joined {:?}", joined);
 
+  let joined = df1.join(&df2, ["a"], ["x"], JoinType::Right.into())?;
+
+  println!("<<<right joined222 {:?}", joined);
+
   let joined = df1.join(&df2, ["a"], ["x"], JoinArgs::new(JoinType::Inner))?;
 
   println!("<<<inner joined {:?}", joined);
