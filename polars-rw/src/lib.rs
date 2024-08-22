@@ -3,6 +3,7 @@ use polars::prelude::*;
 use utils::prelude::*;
 
 pub mod expression;
+pub mod fold_fn;
 pub mod merge;
 
 pub fn polars_read() -> Result<DataFrame> {
