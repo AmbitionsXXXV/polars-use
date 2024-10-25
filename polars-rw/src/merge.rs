@@ -37,7 +37,7 @@ pub fn merge_df() -> Result<()> {
 
   println!("<<<stacked {:?}", stacked);
 
-  let mut schema = Schema::new();
+  let mut schema = Schema::default();
   schema.with_column(
     "symbol".into(),
     DataType::Categorical(None, Default::default()),
