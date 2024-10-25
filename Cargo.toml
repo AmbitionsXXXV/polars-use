@@ -1,15 +1,16 @@
 [workspace]
-members = ["polars-app", "polars-rw", "utils"]
+members = ["polars-app", "polars-rw", "polars-use", "utils"]
 resolver = "2"
 default-members = ["polars-app"]
 
 [workspace.dependencies]
-anyhow = "1.0.86"
-thiserror = "1.0.63"
+anyhow = "1.0.91"
+thiserror = "1.0.65"
 chrono = "0.4.38"
-polars = { version = "0.42.0", features = [
+polars = { version = "0.43.1", features = [
   "lazy",
   "dtype-categorical",
   "concat_str",
   "strings",
+  "json",
 ] }
