@@ -13,4 +13,5 @@ polars = { version = "0.43.1", features = [
   "concat_str",
   "strings",
   "json",
+  "regex"
 ] }
