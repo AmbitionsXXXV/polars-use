@@ -1,16 +1,17 @@
 use polars::{
-  lazy::dsl::{col, concat_str, fold_exprs, lit},
+  lazy::dsl::{col, concat_str, sum_horizontal},
   prelude::*,
 };
 use utils::prelude::Result;
 
-// 手动求和
+// 手动求和 - 使用 sum_horizontal 进行水平求和
 pub fn sum_manual(df: &DataFrame) -> Result<()> {
   let out = df
     .clone()
     .lazy()
     .select([
-      fold_exprs(lit(0), |acc, x| (acc + x).map(Some), [col("*")]).alias("sum")
+      // 使用 sum_horizontal 进行水平求和，第二个参数表示是否忽略空值
+      sum_horizontal([col("*")], true)?.alias("sum"),
     ])
     .collect()?;
 
@@ -23,11 +24,10 @@ pub fn conditional_aggregation(df: &DataFrame) -> Result<()> {
   let out = df
     .clone()
     .lazy()
-    .filter(fold_exprs(
-      lit(false),
-      |acc, x| acc.bitor(&x).map(Some),
-      [col("*").gt(150)],
-    ))
+    .filter(
+      // 使用 any_horizontal 进行条件聚合
+      any_horizontal([col("*").gt(150)])?,
+    )
     .collect()?;
 
   println!("conditional_aggregation {}", out);

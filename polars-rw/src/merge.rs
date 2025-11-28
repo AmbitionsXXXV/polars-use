@@ -1,14 +1,13 @@
 use polars::prelude::*;
+use rand::Rng;
 use utils::prelude::*;
 
-use rand::Rng;
-
 pub fn merge_df() -> Result<()> {
-  let mut rng = rand::thread_rng();
+  let mut rng = rand::rng();
 
   let df1: DataFrame = df!(
     "a" => 0..8,
-    "b" => (0..8).map(|_| rng.gen::<f64>()).collect::<Vec<f64>>()
+    "b" => (0..8).map(|_| rng.random::<f64>()).collect::<Vec<f64>>()
   )?;
 
   let df2: DataFrame = df!(
@@ -16,19 +15,23 @@ pub fn merge_df() -> Result<()> {
       "y" => &["A", "A", "A", "B", "B", "C", "X", "X"]
   )?;
 
-  let joined = df1.join(&df2, ["a"], ["x"], JoinType::Left.into())?;
+  // 使用专用的 left_join 方法
+  let joined = df1.left_join(&df2, ["a"], ["x"])?;
 
   println!("<<<left joined {:?}", joined);
 
-  let joined = df1.join(&df2, ["a"], ["x"], JoinType::Right.into())?;
+  // 使用 join 方法并传入 JoinArgs 和 None 作为 options
+  let joined = df1.join(&df2, ["a"], ["x"], JoinArgs::new(JoinType::Right), None)?;
 
   println!("<<<right joined222 {:?}", joined);
 
-  let joined = df1.join(&df2, ["a"], ["x"], JoinArgs::new(JoinType::Inner))?;
+  // 使用专用的 inner_join 方法
+  let joined = df1.inner_join(&df2, ["a"], ["x"])?;
 
   println!("<<<inner joined {:?}", joined);
 
-  let joined = df1.join(&df2, ["a"], ["x"], JoinArgs::new(JoinType::Full))?;
+  // 使用专用的 full_join 方法
+  let joined = df1.full_join(&df2, ["a"], ["x"])?;
 
   println!("<<<outer joined {:?}", joined);
 
@@ -38,10 +41,7 @@ pub fn merge_df() -> Result<()> {
   println!("<<<stacked {:?}", stacked);
 
   let mut schema = Schema::default();
-  schema.with_column(
-    "symbol".into(),
-    DataType::Categorical(None, Default::default()),
-  );
+  schema.with_column("symbol".into(), DataType::String);
 
   println!("<<<schema {:?}", schema);
 

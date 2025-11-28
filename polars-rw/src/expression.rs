@@ -151,22 +151,22 @@ pub fn polars_group_by() -> Result<()> {
 pub fn polars_combination_expression() -> Result<()> {
   let df = df!("a"=> [1, 2, 3, 4], "b" => [2, 3, 4, 5], "c" => [3, 4, 5, 6], "d" => [4, 5, 6, 7])?;
 
-  // 创建并选择列（排除c、d列）
+  // 创建并选择列（排除 c、d 列）- 使用 col 明确指定需要的列
   let out = df
     .clone()
     .lazy()
     .with_columns([(col("a") * col("b")).alias("a * b")])
-    .select([col("*").exclude(["c", "d"])])
+    .select([col("a"), col("b"), col("a * b")])
     .collect()?;
 
   println!("{}", out);
 
-  // 创建并选择列（排除d列）
+  // 创建并选择列（排除 d 列）- 使用 col 明确指定需要的列
   let out = df
     .clone()
     .lazy()
     .with_columns([(col("a") * col("b")).alias("a * b")])
-    .select([col("*").exclude(["d"])])
+    .select([col("a"), col("b"), col("c"), col("a * b")])
     .collect()?;
 
   println!("{}", out);
